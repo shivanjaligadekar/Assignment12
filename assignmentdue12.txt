@@ -1,0 +1,914 @@
+1.	Write a program to print the area and perimeter of a triangle having sides of 3, 4 and 5 units by creating a class named 'Triangle' with
+ parameter in its constructor.
+
+package java1234assig;
+
+public class Triangle {
+	
+	     double side1;
+	     double side2;
+	     double side3;
+	     
+		public Triangle(double side1, double side2, double side3) {
+			super();
+			this.side1 = side1;
+			this.side2 = side2;
+			this.side3 = side3;
+		}
+		public double calPerimeter()
+		{
+			//double perimeter=side1+side2+side3;
+			return side1+side2+side3;
+					
+		}
+		
+		public double calArea()
+		{
+			double s=(side1+side2+side3)/2;
+			double area=Math.sqrt(s*(s-side1)*(s-side2)*(s-side3));
+			return area;
+		}
+		public void display()
+		{
+			System.out.println("Side1: "+side1+"\n");
+			System.out.println("Side2: "+side2+"\n");
+			System.out.println("Side3: "+side3+"\n");
+			System.out.println("Perimeter: "+calPerimeter());
+			System.out.println("Area: "+calArea());
+			
+		}
+
+		public static void main(String[] args) {
+			Triangle obj=new Triangle(4,5, 3);
+			obj.display();
+
+		}
+
+
+}
+OUTPUT:Side1: 4.0
+
+	Side2: 5.0
+
+	Side3: 3.0
+
+	Perimeter: 12.0
+	Area: 6.0
+
+======================================================================================================================================================
+
+2.Print the sum, difference and product of two complex numbers by creating a class, named 'Complex' with separate methods for each operation whose
+ real and imaginary parts are entered by user. Use Constructors to initialize the data members
+
+package java1234assig;
+
+public class Complex {
+	
+		  double real;
+		  double imaginary;
+		  
+		  
+			public Complex(double real, double imaginary) {
+			super();
+			this.real = real;
+			this.imaginary = imaginary;
+		}
+
+		  public Complex add(Complex num)
+		  {
+			  double real=this.real+num.real;
+			  double imaginary=this.imaginary+num.imaginary;
+			  return new Complex(real,imaginary);
+		  }
+		  
+		  public Complex sub(Complex num)
+		  {
+			  double real=this.real-num.real;
+			  double imaginary=this.imaginary-num.imaginary;
+			  return new Complex(real,imaginary);
+		  }
+		  public void display() {
+			  System.out.println(real+"+"+imaginary+"i");
+		  }
+			public static void main(String[] args) {
+				Complex obj=new Complex(10, 20);
+				Complex obj1=new Complex(20, 30);
+				Complex result=obj.add(obj1);
+				result.display();
+
+			}
+
+		}
+
+
+
+OUTPUT:30.0+50.0i
+
+=====================================================================================================================================================
+3. Write a program by creating an 'Employee' class having the following methods and print the final salary.
+a.	'getInfo()' which takes the salary, number of hours of work per day of employee as parameter
+b.	'AddSal()' which adds $10 to salary of the employee if it is less than $500.
+c.	'AddWork()' which adds $5 to salary of employee if the number of hours of work per day is more than 6 hours.
+
+package assign;
+import java.util.Scanner;
+public class EmployeeQue3 {
+	
+	
+	
+			private double salary;
+			private int numOfHourOfWork;
+
+			Scanner sc = new Scanner(System.in);
+
+			public void getInfo() {
+				System.out.println("Enter the salary of Employee");
+				salary = sc.nextDouble();
+				System.out.println("Enter the number of hour of work");
+				numOfHourOfWork = sc.nextInt();
+			}
+
+			public void addSal() {
+				if (salary < 500) {
+					salary = salary + 10;
+					System.out.println("Salary Updated");
+				}
+
+			}
+
+			public void addWork() {
+				if (numOfHourOfWork > 6) {
+					salary = salary + 5;
+					System.out.println("Salary Updated");
+				}
+			}
+
+			public void display() {
+				System.out.println("Employee Salary : " + salary);
+				System.out.println("Employee Number of hour of work  :  " + numOfHourOfWork);
+			}
+
+		}
+
+
+
+........................................................................................................
+
+package assign;
+
+public class TestEmployeeQue3 {
+	public static void main(String[] args) {
+		EmployeeQue3 employee = new EmployeeQue3();
+		employee.getInfo();
+		employee.addSal();
+		employee.addWork();
+		employee.display();
+}
+}
+
+
+
+OUTPUT: Enter the salary of Employee
+	15000
+	Enter the number of hour of work
+
+	7
+	Salary Updated
+	Employee Salary : 15005.0
+	Employee Number of hour of work  :  7
+
+
+=====================================================================================================================================================
+4. Create a class called 'Matrix' containing constructor that initializes the number of rows and number of columns of a new Matrix object.
+ The Matrix class has the following information:
+a.	number of rows of matrix
+b.	number of columns of matrix
+c.	elements of matrix in the form of 2D array
+     The Matrix class has methods for each of the following:
+a.	get the number of rows
+b.	get the number of columns
+c.	set the elements of the matrix at given position (i,j)
+d.	adding two matrices. If the matrices are not addable, "Matrices cannot be added" will be displayed.
+
+package java1234assig;
+
+public class Matrix {
+
+
+
+	int row;
+	int column;
+	int matrix[][];
+
+	public Matrix(int row, int column) {
+		super();
+		this.row = row;
+		this.column = column;
+		matrix = new int[row][column];
+	}
+
+	public int getRows() {
+		return row;
+	}
+
+	public int getColumn() {
+		return column;
+	}
+
+	public void insertElement(int i, int j, int value) {
+		if ((i >= 0 && i < row) && (j >= 0 && j < column)) {
+			matrix[i][j] = value;
+		} else {
+			System.out.println("Invalid index position");
+		}
+
+	}
+
+	public static Matrix addMatrix(Matrix obj1, Matrix obj2) {
+		if (obj1.row != obj2.row || obj1.column != obj2.column) {
+			System.out.println("Addition is not possible");
+			return null;
+		} else {
+			Matrix result = new Matrix(obj1.row, obj1.column);
+			for (int i = 0; i < obj1.row; i++) {
+				for (int j = 0; j < obj1.column; j++) {
+					result.matrix[i][j] = obj1.matrix[i][j] + obj2.matrix[i][j];
+				}
+			}
+			return result;
+
+		}
+
+	}
+
+	public void display() {
+for(int i=0;i<row;i++)
+{
+	for(int j=0;j<column;j++)
+	{
+		System.out.print(matrix[i][j]+" ");
+	}
+	System.out.println();
+}
+	}
+
+	public static void main(String[] args) {
+      Matrix one=new Matrix(2, 2);
+      Matrix two=new Matrix(2, 2);
+      one.insertElement(0, 0, 1);
+      one.insertElement(0, 1, 1);
+      one.insertElement(1, 0, 1);
+      one.insertElement(1, 1, 1);
+      two.insertElement(0, 0, 2);
+      two.insertElement(0, 1, 2);
+      two.insertElement(1, 0, 2);
+      two.insertElement(1, 1, 2);
+      Matrix result=addMatrix(one, two);
+      result.display();
+      
+	}
+
+}
+OUTPUT: 3 3 
+	3 3 
+
+
+=====================================================================================================================================================
+
+5.Write a class Time with three data members to store hr, min and seconds. Create two constructors and apply checks to set valid time.
+ (hr<24, min<60, sec<60). Also create display function which displays all data members.
+
+package java1234assig;
+import java.util.Scanner;
+public class TimeQue5 {
+	
+		
+			int hr,min,sec;
+			public TimeQue5(int hr,int min,int sec) {
+				if(isValid(hr,min,sec)==true){
+					this.hr = hr;
+					this.min =min;
+					this.sec =sec;
+					System.out.println("Time is: hr:min:sec");
+				}else {
+					System.out.println("Invalid values for time,setting for default values 00:00:00");
+				}
+			}
+			public TimeQue5() {
+				hr = 0;
+				min = 0;
+				sec = 0;
+		
+		}
+			public boolean isValid(int hr, int min,int sec) {
+				return (hr >= 0 && hr < 24) && (min >= 0 && min < 60)&&(sec >= 0 && sec < 60);
+			}
+			public void display() {
+				System.out.println(hr + ":" + min + ":" + sec);
+			}
+			
+			public static void main(String[] args) {
+				Scanner sc = new Scanner(System.in);
+				System.out.println("Enter hr,min and sec: ");
+				int hr = sc.nextInt();
+				int min = sc.nextInt();
+				int sec = sc.nextInt();
+				TimeQue5 time = new TimeQue5(hr, min, sec);
+				time.display();
+			}
+
+}
+
+OUTPUT: Enter hr,min and sec: 
+	23 55 45
+	Time is: hr:min:sec
+		 23:55:45
+
+
+======================================================================================================================================================
+
+6. Create a SavingsAccount class. Use a static data member annual Interest Rate to store the annual interest rate for each of the savers. 
+Each member of the class contains a private data member savingsBalance indicating the amount the saver currently has on deposit. Provide member 
+function calculateMonthlyInterest() that calculates the monthlyinterest by multiplying the balance by annualInterestRate
+divided by 12; this interest should be added to savingsBalance. Provide a static member functionmodifyInterestRate() that sets the static
+annualInterestRate to a new value. Write a driver program to test class SavingsAccount. Instantiate two different objects of classSavingsAccount,
+saver1 and saver2, with balances of
+2000.00 and 3000.00,respectively. Set the annualInterestRate to
+3 percent. Then calculate the monthlyinterest and print the new balances for each of the savers. Then set
+theannualInterestRate to 4 percent, calculate the next month's interest and print the new balances for each of the savers.
+
+
+package java1234assig;
+
+public class SavingAccountQue6 {
+	
+	static double annualInterestRate;
+	private double savingsBalance;
+	private double interest;
+
+	public SavingAccountQue6(double savingsBalance) {
+		
+		this.savingsBalance = savingsBalance;
+
+	}
+
+	public SavingAccountQue6() {
+
+		savingsBalance = 0.0;
+
+	}
+
+	public void calculateMonthlyInterest() {
+		interest = (savingsBalance * annualInterestRate) / 12;
+		savingsBalance = interest + savingsBalance;
+	}
+
+	public static void setAnnualInterestRate(double annualInterestRate) {
+		SavingAccountQue6.annualInterestRate = annualInterestRate / 100;
+	}
+
+	@Override
+	public String toString() {
+		return "SavingsAccount [savingsBalance=" + savingsBalance + ", interest=" + interest + "]";
+	}
+
+	public static void main(String[] args) {
+
+		SavingAccountQue6 saver1 = new SavingAccountQue6(20000);
+		saver1.setAnnualInterestRate(3);
+		saver1.calculateMonthlyInterest();
+		System.out.println(saver1);
+		SavingAccountQue6 saver2 = new SavingAccountQue6(30000);
+		saver2.setAnnualInterestRate(4);
+		saver2.calculateMonthlyInterest();
+		System.out.println(saver2);
+
+	}
+
+}
+
+
+
+
+OUTPUT: SavingsAccount [savingsBalance=20050.0, interest=50.0]
+	SavingsAccount [savingsBalance=30100.0, interest=100.0]
+
+=====================================================================================================================================================
+7. Create a simple bank management system. Below is a brief explanation of each class and its functionality:
+Account Class: Represents a bank account with attributes such as account number and balance. It provides methods to withdraw, deposit, and get
+ the balance of the account.Customer Class: Represents a bank customer with attributes like name, address, mobile number, and an associated account.
+ It provides methods for withdrawing, depositing, getting account details, transferring money to another account, and displaying customer details.
+Bank Class: Represents a bank entity with a fixed maximum size of accounts and customers,interest,size,MAX_SIZE. It provides methods to add an 
+account, remove an account, display account details, and update customer details. Additionally, it has a method to apply interest to an account.
+BankTester Class: This class serves as a test class where the main method is implemented to simulate interactions with the bank system. It allows 
+customers to perform actions like displaying details, withdrawing money, depositing money, and transferring funds between accounts.
+
+package banknamagementsystem;
+
+public class Account {
+	String accountNumber;
+	double balance;
+
+	public Account(String accountNumber) {
+		this.accountNumber = accountNumber;
+		balance = 0;
+	}
+
+	public void withDraw(double amt) {
+		if (balance > amt) {
+			balance -= amt;
+			System.out.println(amt + " withdrawn successfully...");
+			System.out.println("Remaining balance"+balance);
+		} else {
+			System.out.println("insufficient funds...");
+		}
+	}
+
+	public void deposit(double amt) {
+		balance += amt;
+	}
+
+	public double getBalance() {
+		return balance;
+	}
+
+	@Override
+	public String toString() {
+		return "Account [accountNumber=" + accountNumber + ", balance=" + balance + "]";
+	}
+
+}
+	
+
+
+...................................................................
+
+package banknamagementsystem;
+
+public class Customer {
+
+	private String name;
+	private String address;
+	private double mobileNumber;
+	Account account;
+
+	public Customer(String name, String address, double mobileNumber, Account account) {
+		super();
+		this.name = name;
+		this.address = address;
+		this.mobileNumber = mobileNumber;
+		this.account = account;
+	}
+   
+	public String getName() {
+		return name;
+	}
+
+	public String getaccNo() {
+		return account.accountNumber;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void withdraw(double amt) {
+		if (Bank.maxWithdrawelLimit > amt) {
+			account.withDraw(amt);
+		} else {
+			System.out.println("Maximum withdraw Limit exeeds");
+		}
+	}
+	
+	public void deposit(double amt)
+	{
+		account.balance+=amt;
+	}
+
+	public void getAccountDetails() {
+		System.out.println(account);
+	}
+
+	public void transferAmount(Account account1, double amt) {
+		if (this.account.balance > amt) {
+			this.account.withDraw(amt);
+			account1.deposit(amt);
+			System.out.println("amount transfered successfully...");
+		}
+		else
+		{
+			System.out.println("insufficient funds for transfer...");
+		}
+	}
+
+	public void setMobileNumber(double mobileNumber) {
+		this.mobileNumber = mobileNumber;
+	}
+	
+	public Account getAccount() {
+		return account;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
+	}
+
+	public void displayDetails()
+	{
+		System.out.println("Name:-"+name+" Mobile no"+mobileNumber+" Address"+address+" Account Number: "+account.accountNumber+" account Balance:"+account.balance);
+	}
+
+	@Override
+	public String toString() {
+		return "Customer [name=" + name + ", address=" + address + ", mobileNumber=" + mobileNumber + ", account="
+				+ account + "]";
+	}
+}
+................................................................................................................................
+
+package banknamagementsystem;
+
+public class Bank {
+	private final String NAME = "SBI";
+	public Account account[];
+	public Customer customer[];
+	private static double interestRate=0.03;
+	static int maxWithdrawelLimit=10000;
+	int MAX_SIZE = 10;
+	int size = 0;
+
+	public Bank() {
+		this.account = new Account[MAX_SIZE];
+		this.customer = new Customer[MAX_SIZE];
+	}
+
+	public void addAccount(String accNo, String name, String address, double mobNo) {
+		if (size < MAX_SIZE) {
+			int i = size;
+			account[i] = new Account(accNo);
+			customer[i] = new Customer(name, address, mobNo, account[i]);
+			size++;
+			//return account[i];
+		} else {
+			System.out.println("Bank is full...");
+			//return null;
+		}
+
+	}
+
+	public void removeBankAccount(String no) {
+		for (int i = 0; i < size; i++) {
+			if (account[i].accountNumber == no) {
+				for(int j=i;j<size-1;j++)
+				{
+				account[j] = account[j+1];
+				customer[j]=customer[j+1];
+				
+			}
+		}
+			
+	}
+		account[size]=null;
+		customer[size]=null;
+		size--;
+	}
+
+	public void displayDetails() {
+		for (int i = 0; i < size; i++) {
+			customer[i].displayDetails();
+		}
+	}
+
+	public void updateDetails(String accNo, double mobNo) {
+		for (int i = 0; i < size; i++) {
+			if (customer[i].getAccount().accountNumber == accNo) {
+				customer[i].setMobileNumber(mobNo);
+			} 
+//			else {
+//				System.out.println("customer not found...");
+//			}
+		}
+	}
+	
+	
+	public void applyInterest(Account account1)
+	{
+		double interest=account1.balance*interestRate;
+		account1.balance+=interest;
+	}
+
+}
+......................................................................................................
+
+
+package banknamagementsystem;
+
+import java.util.Scanner;
+
+public class BankTester {
+
+	public static void main(String[] args) {
+		Bank banker = new Bank();
+		banker.addAccount("SA202413", "pravin","nashik", 4587290);
+		banker.addAccount("SA202414", "pankaj", "mumbai", 5487240);
+		banker.addAccount("SA202416", "prashant", "nsk", 4589760);
+		banker.addAccount("SA202419", "punit", "pune", 54872745);
+	
+		System.out.println("-----WELCOME TO SBI-----");
+		System.out.println("Select the role :\n1.Customer\n2.Banker");
+		Scanner sc = new Scanner(System.in);
+		int ch = sc.nextInt();
+		if (ch == 1) {
+			System.out.println("Enter your name");
+			String name = sc.next();
+			for (int i = 0; i < banker.size; i++) {
+				if (name.equalsIgnoreCase(banker.customer[i].getName())) {
+					int choice;
+					do {
+					System.out.println("---------MENU----------");
+					System.out.println("1.Display Details\t2.Withdraw\t3.Deposite\t4.Fund Transfer");
+					choice = sc.nextInt();
+					switch (choice) {
+					case 1: {
+						banker.customer[i].displayDetails();
+						break;
+					}
+					case 2: {
+						System.out.println("Enter amount to withdraw");
+						double amt = sc.nextDouble();
+						banker.customer[i].withdraw(amt);
+						break;
+					}
+					case 3: {
+						System.out.println("Enter amount to deposite");
+						double amt = sc.nextDouble();
+						banker.customer[i].deposit(amt);
+						break;
+					}
+					case 4: {
+						System.out.println("Enter the accNo for transfer");
+						String accNo = sc.next();
+						boolean flag=false;
+						for (int k = 0; k < banker.size; k++) {
+							if (accNo.equalsIgnoreCase(banker.customer[k].getaccNo())) {
+								flag=true;
+								System.out.println("Enter amount to transfer");
+								double amt = sc.nextDouble();
+								banker.customer[i].transferAmount(banker.account[k], amt);
+								break;
+							}
+							
+						}
+						if(!flag)
+						{
+							System.out.println("not found");
+						}
+
+						break;
+					}
+					case 5: {
+						
+						break;
+					}
+					default:
+					{
+						System.out.println("You have entered wrong choice");
+					}
+					}
+					}
+					while(choice!=5);
+				}
+				else
+				{
+					
+				}
+				
+			}
+
+		} else {
+
+		}
+
+
+	}
+
+	}
+
+
+OUTPUT:-----WELCOME TO SBI-----
+	Select the role :
+	1.Customer
+	2.Banker
+	1
+	Enter your name
+
+	pankaj
+	---------MENU----------
+	1.Display Details	2.Withdraw	3.Deposite	4.Fund Transfer
+
+	3
+	Enter amount to deposite
+
+	50000
+	---------MENU----------
+	1.Display Details	2.Withdraw	3.Deposite	4.Fund Transfer
+
+	2
+	Enter amount to withdraw
+
+	2000
+	2000.0 withdrawn successfully...
+	Remaining balance48000.0
+	---------MENU----------
+	1.Display Details	2.Withdraw	3.Deposite	4.Fund Transfer
+
+	1
+	Name:-pankaj Mobile no5487240.0 Addressmumbai Account Number: SA202414 account Balance:48000.0
+	---------MENU----------
+	1.Display Details	2.Withdraw	3.Deposite	4.Fund Transfer
+
+	5
+
+
+=====================================================================================================================================================
+8. Create classes to represent a Library and Book. The Library class should contain an Array of Book objects. Implement methods to add, remove, and 
+display books in the library.
+package java1234assig;
+import java.util.ArrayList;
+
+class Book {
+	private String title;
+	  private String author;
+
+	  public Book(String title, String author) {
+	    this.title = title;
+	    this.author = author;
+	  }
+
+	  public String getTitle() {
+	    return title;
+	  }
+
+	  public void setTitle(String title) {
+	    this.title = title;
+	  }
+
+	  public String getAuthor() {
+	    return author;
+	  }
+
+	  public void setAuthor(String author) {
+	    this.author = author;
+	  }
+	}
+//........................................................................
+
+ class Library {
+	
+	private ArrayList < Book > books;
+
+	  public Library() {
+	    books = new ArrayList < Book > ();
+	  }
+
+	  public void addBook(Book book) {
+	    books.add(book);
+	  }
+
+	  public void removeBook(Book book) {
+	    books.remove(book);
+	  }
+
+	  public ArrayList < Book > getBooks() {
+	    return books;
+	  }
+	}
+
+...................................................
+public class TestLibraryQue8 {
+	public static void main(String[] args) {
+	    Library library = new Library();
+
+	    Book book1 = new Book("Adventures of Tom Sawyer", "Mark Twain");
+	    Book book2 = new Book("Ben Hur", "Lewis Wallace");
+	    Book book3 = new Book("Time Machine", "H.G. Wells");
+	    Book book4 = new Book("Anna Karenina", "Leo Tolstoy");
+
+	    library.addBook(book1);
+	    library.addBook(book2);
+	    library.addBook(book3);
+	    library.addBook(book4);
+
+	    System.out.println("Books in the library:");
+	    for (Book book: library.getBooks()) {
+	      System.out.println(book.getTitle() + " by " + book.getAuthor());
+	    }
+
+	    library.removeBook(book2);
+	    System.out.println("\nBooks in the library after removing " + book2.getTitle() + ":");
+	    System.out.println("......................................................");
+	    for (Book book: library.getBooks()) {
+	      System.out.println(book.getTitle() + " by " + book.getAuthor());
+	    }
+	  }
+
+}
+
+OUTPUT:Books in the library:
+	Adventures of Tom Sawyer by Mark Twain
+	Ben Hur by Lewis Wallace
+	Time Machine by H.G. Wells
+	Anna Karenina by Leo Tolstoy
+
+	Books in the library after removing Ben Hur:
+	......................................................
+	Adventures of Tom Sawyer by Mark Twain
+	Time Machine by H.G. Wells
+	Anna Karenina by Leo Tolstoy
+
+=====================================================================================================================================================
+9. Design classes ShoppingCart and Product. ShoppingCart class that contains an Array of Product objects. Implement methods to add products to the
+ cart, calculate the total cost, and display the contents of the cart. (Decide the data members and methods of the classes
+Effectively)
+
+package java1234assig;
+
+public class Product {
+	private String name;
+    private double price;
+
+    public Product(String name, double price) {
+        this.name = name;
+        this.price = price;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+}
+..........................................
+
+package java1234assig;
+
+import java.util.ArrayList;
+
+public class ShoppingCart {
+
+	private ArrayList<Product> cart;
+
+	    public ShoppingCart() {
+	        this.cart = new ArrayList<>();
+	    }
+
+	    public void addProduct(Product product) {
+	        cart.add(product);
+	    }
+
+	    public double calculateTotalCost() {
+	        double totalCost=0;
+	        for (Product product : cart) {
+	            totalCost += product.getPrice();
+	        }
+	        return totalCost;
+	    }
+	    public void displayCart() {
+	        System.out.println("Shopping Cart:");
+	        for (Product product : cart) {
+	            System.out.println(product.getName() + " - $" + product.getPrice());
+	        }
+	        System.out.println("Total cost: $" + calculateTotalCost());
+	    }
+	}
+
+
+................................................................
+package java1234assig;
+
+public class TestClass {
+	public static void main(String[] args) {
+        Product product1 = new Product("Laptop", 999.99);
+        Product product2 = new Product("Phone", 699.99);
+        Product product3 = new Product("Headphones", 99.99);
+
+        ShoppingCart cart = new ShoppingCart();
+        cart.addProduct(product1);
+        cart.addProduct(product2);
+        cart.addProduct(product3);
+
+        cart.displayCart();
+    }
+}
+
+OUTPUT:
+
+Shopping Cart:
+Laptop - $999.99
+Phone - $699.99
+Headphones - $99.99
+Total cost: $1799.97
+
+
